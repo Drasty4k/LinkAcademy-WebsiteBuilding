@@ -3,55 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do List</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="todo.css">
+    <script src="todo.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-
     <div id="app">
         <div class="todo-list">
             <h1>To do:</h1>
-            <p>{{ "Total: " + todos.length}}</p>
+            <div class="filters">
+                <label>{{ "Total: " +  todos.length}} </label>
+            </div>
+            <ul>
+                <!-- <li v-for="(todo, index) in todos" v-bind:class="{done: todo.isDone}"
+                                                          class="task">
+                    <div class="title" >
+                        {{todo.title}}
+                    </div>
+                    
+                    <div class="controls">
+                        <div class="check" @click="checkTodo(index)">✅</div>
+                        <div class="delete" @click="deleteTodo(index)">❌</div>
+                    </div>
+                   
+                     
+                 </li> -->
+                 <task v-for="(todo, index) in todos"
+                        taks_title="todo.title"
+                        v-bind = "task_isDone"
+                        @click="checkTodo(index)"
+                        @click="deleteTodo(index)">
+                </task>
+                
+            </ul>
+            <div class="new_task">
+                    Task:
+                    <input type="text" v-model="task" @keyup.enter="saveTodo" placeholder="What do you need to do?">
+                <div class="save_task"><button @click="saveTodo">Save item</button></div>
+            </div>
         </div>
-        <ul>
-            <li v-for="item in todos">
-                {{ item.name }}
-            </li>
-        </ul>
-        <div class="new_task">
-            <label for="new_task">Task: </label>
-            <input type="text" name="new_task" id="" v-model="new_task_entry">
-            <input @click="saveNewTodoItem" class="save_task" type="button" value="Save Item" placeholder="">
-        </div>
+
     </div>
-    
 
-    <script>
-
-        class Todo{
-            constructor(name){
-                this.name = name
-                this.isDone = false
-            }
-        }
-
-        var app = new Vue({
-            el: "#app",
-            data:{
-                new_task_entry: "",
-                todos:[
-                new Todo("Wake Up"),
-                new Todo("Eat breakfast"),
-                new Todo("Go to work")]    
-            },
-            methods:{
-                saveNewTodoItem(){
-                    this.todos.push(new Todo(this.new_task_entry))
-                    this.new_task_entry = ""
-                }
-            }
-        })
-
-    </script>
 </body>
 </html>
