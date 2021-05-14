@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <transition name="fade">
+            <div class="faded" v-if="show">
+                Se vede sau nu
+            </div>
+        </transition>
+
+        <transition name="bounce">
+            <div class="bounced">
+                Acesta este un element care face bounce
+            </div>
+        </transition>
+
+        <transition-group name="fade" tag="ul">
+                <span v-for="number in numbers" :key="number">{{ number }}</span>
+        </transition-group>
+
+        <button @click="switchShow">
+            Show
+        </button>
+
+        <button @click="addNumber">
+            Add number
+        </button>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                    show: false,
+                    numbers: [1,2,3,4,5,6,7,8]
+            },
+            methods: {
+                switchShow() {
+                    this.show = !this.show
+                },
+                addNumber() {
+                    this.numbers.push(Math.floor(Math.random() * 10))
+                }
+            },
+        })
+
+    </script>
+
+    <style>
+        .fade-enter-active {
+            transition: all 1s ease;
+        }
+        .fade-leave-active{
+            transition: all .3s ease
+        }
+        .fade-enter{
+            opacity: 0.5;
+        }
+
+        .bounce-enter-active{
+            animation-duration: 1s;
+        }
+        .bounce-leave-active{
+            animation-duration: 1s;
+        }
+        
+    </style>
+</body>
+</html>

@@ -11,8 +11,24 @@ Vue.component('product-list', {
                 </ul>`
 })
 
+const Home = {
+  template: `<div>Aici va fi Home</div>`
+}
+
+const Cart = {
+  template: `<div>Aici va fi cartul</div>`
+}
+
+const ecom_router = new VueRouter({
+  route: [
+    { path: '*', component: 'product-list' },
+    { path: '/cart', component: Cart}
+  ]
+})
+
 new Vue({
     el: '#products',
+    router: ecom_router,
     data: {
         productsArray: [
           {
